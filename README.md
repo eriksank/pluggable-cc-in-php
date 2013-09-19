@@ -184,21 +184,25 @@
 `-- vm : to call the virtual machine with an .il file
 </pre>
 
-## HARD PREREQUISITE: PHP
+## Hard prerequisite: PHP
 
-You must have the commandline version of php installed on your system to execute the scripts
+You must have the commandline version of php installed on your system to execute the scripts:
 
-$ sudo apt-get install php5-cli bison
+$ sudo apt-get install php5-cli
 
-## SOFT PREREQUISITE: LINUX
+You must have bison installed to generate the grammar XML file:
+
+$ sudo apt-get install bison
+
+## Soft prerequisite: Linux
 
 This source code was tested on linux only. Windows (\r\n) and Mac (\r) have other new line conventions than Linux (\n). If this causes trouble, switch your Windows or Mac machine in some kind of Linux compabitility mode, or else change the definitions for newline in the source code.
 
-## INSTALL
+## Install
 
 Unzip this library in any folder. Next, navigate from the commandline to the library. You can execute the tests included.
 
-## INSTALLING INTO YOUR OWN PROGRAM SOURCE TREE
+## Installing into your own program tree
 
-This can be effected through copying/pasting the folder or subfolder that you want to use in your own Php program.
+You can do this by copying the folder or subfolder that you want to use in your own Php program.
 
