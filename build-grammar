@@ -1,0 +1,5 @@
+#!/bin/bash
+./generate-grammar-file || { echo 'build-grammar: generation of grammar file failed'; exit 1; }
+bison lib/Compiler/grammar.y --xml=lib/Compiler/grammar.xml
+
+

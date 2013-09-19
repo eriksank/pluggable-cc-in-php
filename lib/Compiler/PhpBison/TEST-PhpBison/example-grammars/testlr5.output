@@ -1,0 +1,424 @@
+Grammar
+
+    0 $accept: exp $end
+
+    1 exp: NUMBER
+    2    | exp PLUS exp
+    3    | exp MINUS exp
+    4    | exp MULT exp
+    5    | exp DIV exp
+    6    | MINUS exp
+    7    | PLUS exp
+    8    | exp EXPONENTIATE exp
+    9    | BRACKET_LEFT exp BRACKET_RIGHT
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+NUMBER (258) 1
+MINUS (259) 3 6
+PLUS (260) 2 7
+MULT (261) 4
+DIV (262) 5
+EXPONENTIATE (263) 8
+BRACKET_LEFT (264) 9
+BRACKET_RIGHT (265) 9
+UNARY (266)
+
+
+Nonterminals, with rules where they appear
+
+$accept (12)
+    on left: 0
+exp (13)
+    on left: 1 2 3 4 5 6 7 8 9, on right: 0 2 3 4 5 6 7 8 9
+
+
+state 0
+
+    0 $accept: . exp $end
+    1 exp: . NUMBER
+    2    | . exp PLUS exp
+    3    | . exp MINUS exp
+    4    | . exp MULT exp
+    5    | . exp DIV exp
+    6    | . MINUS exp
+    7    | . PLUS exp
+    8    | . exp EXPONENTIATE exp
+    9    | . BRACKET_LEFT exp BRACKET_RIGHT
+
+    NUMBER        shift, and go to state 1
+    MINUS         shift, and go to state 2
+    PLUS          shift, and go to state 3
+    BRACKET_LEFT  shift, and go to state 4
+
+    exp  go to state 5
+
+
+state 1
+
+    1 exp: NUMBER .
+
+    $default  reduce using rule 1 (exp)
+
+
+state 2
+
+    1 exp: . NUMBER
+    2    | . exp PLUS exp
+    3    | . exp MINUS exp
+    4    | . exp MULT exp
+    5    | . exp DIV exp
+    6    | . MINUS exp
+    6    | MINUS . exp
+    7    | . PLUS exp
+    8    | . exp EXPONENTIATE exp
+    9    | . BRACKET_LEFT exp BRACKET_RIGHT
+
+    NUMBER        shift, and go to state 1
+    MINUS         shift, and go to state 2
+    PLUS          shift, and go to state 3
+    BRACKET_LEFT  shift, and go to state 4
+
+    exp  go to state 6
+
+
+state 3
+
+    1 exp: . NUMBER
+    2    | . exp PLUS exp
+    3    | . exp MINUS exp
+    4    | . exp MULT exp
+    5    | . exp DIV exp
+    6    | . MINUS exp
+    7    | . PLUS exp
+    7    | PLUS . exp
+    8    | . exp EXPONENTIATE exp
+    9    | . BRACKET_LEFT exp BRACKET_RIGHT
+
+    NUMBER        shift, and go to state 1
+    MINUS         shift, and go to state 2
+    PLUS          shift, and go to state 3
+    BRACKET_LEFT  shift, and go to state 4
+
+    exp  go to state 7
+
+
+state 4
+
+    1 exp: . NUMBER
+    2    | . exp PLUS exp
+    3    | . exp MINUS exp
+    4    | . exp MULT exp
+    5    | . exp DIV exp
+    6    | . MINUS exp
+    7    | . PLUS exp
+    8    | . exp EXPONENTIATE exp
+    9    | . BRACKET_LEFT exp BRACKET_RIGHT
+    9    | BRACKET_LEFT . exp BRACKET_RIGHT
+
+    NUMBER        shift, and go to state 1
+    MINUS         shift, and go to state 2
+    PLUS          shift, and go to state 3
+    BRACKET_LEFT  shift, and go to state 4
+
+    exp  go to state 8
+
+
+state 5
+
+    0 $accept: exp . $end
+    2 exp: exp . PLUS exp
+    3    | exp . MINUS exp
+    4    | exp . MULT exp
+    5    | exp . DIV exp
+    8    | exp . EXPONENTIATE exp
+
+    $end          shift, and go to state 9
+    MINUS         shift, and go to state 10
+    PLUS          shift, and go to state 11
+    MULT          shift, and go to state 12
+    DIV           shift, and go to state 13
+    EXPONENTIATE  shift, and go to state 14
+
+
+state 6
+
+    2 exp: exp . PLUS exp
+    3    | exp . MINUS exp
+    4    | exp . MULT exp
+    5    | exp . DIV exp
+    6    | MINUS exp .  [$end, MINUS, PLUS, MULT, DIV, BRACKET_RIGHT]
+    8    | exp . EXPONENTIATE exp
+
+    EXPONENTIATE  shift, and go to state 14
+
+    $default  reduce using rule 6 (exp)
+
+    Conflict between rule 6 and token MINUS resolved as reduce (MINUS < UNARY).
+    Conflict between rule 6 and token PLUS resolved as reduce (PLUS < UNARY).
+    Conflict between rule 6 and token MULT resolved as reduce (MULT < UNARY).
+    Conflict between rule 6 and token DIV resolved as reduce (DIV < UNARY).
+    Conflict between rule 6 and token EXPONENTIATE resolved as shift (UNARY < EXPONENTIATE).
+
+
+state 7
+
+    2 exp: exp . PLUS exp
+    3    | exp . MINUS exp
+    4    | exp . MULT exp
+    5    | exp . DIV exp
+    7    | PLUS exp .  [$end, MINUS, PLUS, MULT, DIV, BRACKET_RIGHT]
+    8    | exp . EXPONENTIATE exp
+
+    EXPONENTIATE  shift, and go to state 14
+
+    $default  reduce using rule 7 (exp)
+
+    Conflict between rule 7 and token MINUS resolved as reduce (MINUS < UNARY).
+    Conflict between rule 7 and token PLUS resolved as reduce (PLUS < UNARY).
+    Conflict between rule 7 and token MULT resolved as reduce (MULT < UNARY).
+    Conflict between rule 7 and token DIV resolved as reduce (DIV < UNARY).
+    Conflict between rule 7 and token EXPONENTIATE resolved as shift (UNARY < EXPONENTIATE).
+
+
+state 8
+
+    2 exp: exp . PLUS exp
+    3    | exp . MINUS exp
+    4    | exp . MULT exp
+    5    | exp . DIV exp
+    8    | exp . EXPONENTIATE exp
+    9    | BRACKET_LEFT exp . BRACKET_RIGHT
+
+    MINUS          shift, and go to state 10
+    PLUS           shift, and go to state 11
+    MULT           shift, and go to state 12
+    DIV            shift, and go to state 13
+    EXPONENTIATE   shift, and go to state 14
+    BRACKET_RIGHT  shift, and go to state 15
+
+
+state 9
+
+    0 $accept: exp $end .
+
+    $default  accept
+
+
+state 10
+
+    1 exp: . NUMBER
+    2    | . exp PLUS exp
+    3    | . exp MINUS exp
+    3    | exp MINUS . exp
+    4    | . exp MULT exp
+    5    | . exp DIV exp
+    6    | . MINUS exp
+    7    | . PLUS exp
+    8    | . exp EXPONENTIATE exp
+    9    | . BRACKET_LEFT exp BRACKET_RIGHT
+
+    NUMBER        shift, and go to state 1
+    MINUS         shift, and go to state 2
+    PLUS          shift, and go to state 3
+    BRACKET_LEFT  shift, and go to state 4
+
+    exp  go to state 16
+
+
+state 11
+
+    1 exp: . NUMBER
+    2    | . exp PLUS exp
+    2    | exp PLUS . exp
+    3    | . exp MINUS exp
+    4    | . exp MULT exp
+    5    | . exp DIV exp
+    6    | . MINUS exp
+    7    | . PLUS exp
+    8    | . exp EXPONENTIATE exp
+    9    | . BRACKET_LEFT exp BRACKET_RIGHT
+
+    NUMBER        shift, and go to state 1
+    MINUS         shift, and go to state 2
+    PLUS          shift, and go to state 3
+    BRACKET_LEFT  shift, and go to state 4
+
+    exp  go to state 17
+
+
+state 12
+
+    1 exp: . NUMBER
+    2    | . exp PLUS exp
+    3    | . exp MINUS exp
+    4    | . exp MULT exp
+    4    | exp MULT . exp
+    5    | . exp DIV exp
+    6    | . MINUS exp
+    7    | . PLUS exp
+    8    | . exp EXPONENTIATE exp
+    9    | . BRACKET_LEFT exp BRACKET_RIGHT
+
+    NUMBER        shift, and go to state 1
+    MINUS         shift, and go to state 2
+    PLUS          shift, and go to state 3
+    BRACKET_LEFT  shift, and go to state 4
+
+    exp  go to state 18
+
+
+state 13
+
+    1 exp: . NUMBER
+    2    | . exp PLUS exp
+    3    | . exp MINUS exp
+    4    | . exp MULT exp
+    5    | . exp DIV exp
+    5    | exp DIV . exp
+    6    | . MINUS exp
+    7    | . PLUS exp
+    8    | . exp EXPONENTIATE exp
+    9    | . BRACKET_LEFT exp BRACKET_RIGHT
+
+    NUMBER        shift, and go to state 1
+    MINUS         shift, and go to state 2
+    PLUS          shift, and go to state 3
+    BRACKET_LEFT  shift, and go to state 4
+
+    exp  go to state 19
+
+
+state 14
+
+    1 exp: . NUMBER
+    2    | . exp PLUS exp
+    3    | . exp MINUS exp
+    4    | . exp MULT exp
+    5    | . exp DIV exp
+    6    | . MINUS exp
+    7    | . PLUS exp
+    8    | . exp EXPONENTIATE exp
+    8    | exp EXPONENTIATE . exp
+    9    | . BRACKET_LEFT exp BRACKET_RIGHT
+
+    NUMBER        shift, and go to state 1
+    MINUS         shift, and go to state 2
+    PLUS          shift, and go to state 3
+    BRACKET_LEFT  shift, and go to state 4
+
+    exp  go to state 20
+
+
+state 15
+
+    9 exp: BRACKET_LEFT exp BRACKET_RIGHT .
+
+    $default  reduce using rule 9 (exp)
+
+
+state 16
+
+    2 exp: exp . PLUS exp
+    3    | exp . MINUS exp
+    3    | exp MINUS exp .  [$end, MINUS, PLUS, BRACKET_RIGHT]
+    4    | exp . MULT exp
+    5    | exp . DIV exp
+    8    | exp . EXPONENTIATE exp
+
+    MULT          shift, and go to state 12
+    DIV           shift, and go to state 13
+    EXPONENTIATE  shift, and go to state 14
+
+    $default  reduce using rule 3 (exp)
+
+    Conflict between rule 3 and token MINUS resolved as reduce (%left MINUS).
+    Conflict between rule 3 and token PLUS resolved as reduce (%left PLUS).
+    Conflict between rule 3 and token MULT resolved as shift (MINUS < MULT).
+    Conflict between rule 3 and token DIV resolved as shift (MINUS < DIV).
+    Conflict between rule 3 and token EXPONENTIATE resolved as shift (MINUS < EXPONENTIATE).
+
+
+state 17
+
+    2 exp: exp . PLUS exp
+    2    | exp PLUS exp .  [$end, MINUS, PLUS, BRACKET_RIGHT]
+    3    | exp . MINUS exp
+    4    | exp . MULT exp
+    5    | exp . DIV exp
+    8    | exp . EXPONENTIATE exp
+
+    MULT          shift, and go to state 12
+    DIV           shift, and go to state 13
+    EXPONENTIATE  shift, and go to state 14
+
+    $default  reduce using rule 2 (exp)
+
+    Conflict between rule 2 and token MINUS resolved as reduce (%left MINUS).
+    Conflict between rule 2 and token PLUS resolved as reduce (%left PLUS).
+    Conflict between rule 2 and token MULT resolved as shift (PLUS < MULT).
+    Conflict between rule 2 and token DIV resolved as shift (PLUS < DIV).
+    Conflict between rule 2 and token EXPONENTIATE resolved as shift (PLUS < EXPONENTIATE).
+
+
+state 18
+
+    2 exp: exp . PLUS exp
+    3    | exp . MINUS exp
+    4    | exp . MULT exp
+    4    | exp MULT exp .  [$end, MINUS, PLUS, MULT, DIV, BRACKET_RIGHT]
+    5    | exp . DIV exp
+    8    | exp . EXPONENTIATE exp
+
+    EXPONENTIATE  shift, and go to state 14
+
+    $default  reduce using rule 4 (exp)
+
+    Conflict between rule 4 and token MINUS resolved as reduce (MINUS < MULT).
+    Conflict between rule 4 and token PLUS resolved as reduce (PLUS < MULT).
+    Conflict between rule 4 and token MULT resolved as reduce (%left MULT).
+    Conflict between rule 4 and token DIV resolved as reduce (%left DIV).
+    Conflict between rule 4 and token EXPONENTIATE resolved as shift (MULT < EXPONENTIATE).
+
+
+state 19
+
+    2 exp: exp . PLUS exp
+    3    | exp . MINUS exp
+    4    | exp . MULT exp
+    5    | exp . DIV exp
+    5    | exp DIV exp .  [$end, MINUS, PLUS, MULT, DIV, BRACKET_RIGHT]
+    8    | exp . EXPONENTIATE exp
+
+    EXPONENTIATE  shift, and go to state 14
+
+    $default  reduce using rule 5 (exp)
+
+    Conflict between rule 5 and token MINUS resolved as reduce (MINUS < DIV).
+    Conflict between rule 5 and token PLUS resolved as reduce (PLUS < DIV).
+    Conflict between rule 5 and token MULT resolved as reduce (%left MULT).
+    Conflict between rule 5 and token DIV resolved as reduce (%left DIV).
+    Conflict between rule 5 and token EXPONENTIATE resolved as shift (DIV < EXPONENTIATE).
+
+
+state 20
+
+    2 exp: exp . PLUS exp
+    3    | exp . MINUS exp
+    4    | exp . MULT exp
+    5    | exp . DIV exp
+    8    | exp . EXPONENTIATE exp
+    8    | exp EXPONENTIATE exp .  [$end, MINUS, PLUS, MULT, DIV, BRACKET_RIGHT]
+
+    EXPONENTIATE  shift, and go to state 14
+
+    $default  reduce using rule 8 (exp)
+
+    Conflict between rule 8 and token MINUS resolved as reduce (MINUS < EXPONENTIATE).
+    Conflict between rule 8 and token PLUS resolved as reduce (PLUS < EXPONENTIATE).
+    Conflict between rule 8 and token MULT resolved as reduce (MULT < EXPONENTIATE).
+    Conflict between rule 8 and token DIV resolved as reduce (DIV < EXPONENTIATE).
+    Conflict between rule 8 and token EXPONENTIATE resolved as shift (%right EXPONENTIATE).

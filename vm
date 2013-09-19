@@ -1,0 +1,22 @@
+#!/usr/bin/php
+<?php
+/*
+	Phnom Penh, Cambodia, December 2011
+	Written by Erik Poupaert, erik@sankuru.biz
+	Licensed under the LGPL
+*/
+
+/*
+
+The vm virtual machine the .il file specified in the first argument on the command line,
+then executes it.
+
+*/
+ob_start();
+require_once('lib/VirtualMachine/VirtualMachine.php');
+ob_end_clean();
+
+$vm=new VirtualMachine();
+$fileName=file_get_contents($argv[1]);
+$vm->run($fileName);
+?>

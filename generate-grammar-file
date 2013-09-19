@@ -1,0 +1,10 @@
+#!/usr/bin/php
+<?php
+ob_start();
+require_once('lib/Compiler/CompilerGrammarGenerator.php');
+ob_end_clean();
+$generator=new CompilerGrammarGenerator();
+$generator->collectData();
+$generator->output();
+?>
+

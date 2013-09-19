@@ -1,0 +1,28 @@
+#!/usr/bin/php
+<?php
+ob_start();
+require_once('lib/Compiler/Compiler.php');
+ob_end_clean();
+/*
+	Phnom Penh, Cambodia, December 2011
+	Written by Erik Poupaert, erik@sankuru.biz
+	Licensed under the LGPL
+*/
+
+/*
+
+The tlc compiler read the file specified in the first argument on the command line,
+then parses it, and then print the instructions to a file with the same name, but with suffix .il.
+
+*/
+$tlFileName=$argv[1];
+$folder=dirname($tlFileName);
+$fileBaseName=basename($tlFileName,'.tl');
+$inputText=file_get_contents($tlFileName);
+$compiler=new Compiler();
+$compiler->compile($inputText);
+$outputText=compilerInstructions($compiler);
+$ilFileName="$folder/$fileBaseName.il";
+file_put_contents($ilFileName,$outputText);
+?>
+
