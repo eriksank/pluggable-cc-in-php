@@ -1,7 +1,6 @@
-* Pluggable compiler in PHP
+# Pluggable compiler in PHP
 
-
-
+<pre>
 |-- build-grammar : Generates the grammar file and calls bison to the generate the XML file
 |-- examples
 |   |-- example1.il : example file in intermediate language
@@ -183,23 +182,23 @@
 |-- tlc : to call the compiler with a .tl file
 |-- VERSION
 `-- vm : to call the virtual machine with an .il file
+</pre>
 
-
-** HARD PREREQUISITE: PHP
+## HARD PREREQUISITE: PHP
 
 You must have the commandline version of php installed on your system to execute the scripts
 
 $ sudo apt-get install php5-cli bison
 
-** SOFT PREREQUISITE: LINUX
+## SOFT PREREQUISITE: LINUX
 
 This source code was tested on linux only. Windows (\r\n) and Mac (\r) have other new line conventions than Linux (\n). If this causes trouble, switch your Windows or Mac machine in some kind of Linux compabitility mode, or else change the definitions for newline in the source code.
 
-** INSTALL
+## INSTALL
 
 Unzip this library in any folder. Next, navigate from the commandline to the library. You can execute the tests included.
 
-** INSTALLING INTO YOUR OWN PROGRAM SOURCE TREE
+## INSTALLING INTO YOUR OWN PROGRAM SOURCE TREE
 
 This can be effected through copying/pasting the folder or subfolder that you want to use in your own Php program.
 
