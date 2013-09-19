@@ -4,7 +4,7 @@
 |-- build-grammar : Generates the grammar file
 |-- examples
 |   |-- example1.il : example file in intermediate language
-|   |-- example1.tl : example source file
+|   |-- example1.tl : example source file in tl scripting language
 ...
 |-- generate-grammar-file : composes the bison input grammar
 |-- lib : the implementation
@@ -178,10 +178,10 @@
 |       `-- VMInstruction.php
 |-- LICENSE
 |-- README.md
-|-- tl
-|-- tlc : to call the compiler with a .tl file
+|-- tl: calls tlc with a .tl file and then vm with the .il file generated
+|-- tlc : calls the compiler with a .tl file
 |-- VERSION
-`-- vm : to call the virtual machine with an .il file
+`-- vm : calls the virtual machine with an .il file
 </pre>
 
 ## Hard prerequisite: PHP
