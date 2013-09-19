@@ -1,7 +1,7 @@
 # Pluggable compiler in PHP
 
 <pre>
-|-- build-grammar : Generates the grammar file and calls bison to the generate the XML file
+|-- build-grammar : Generates the grammar file
 |-- examples
 |   |-- example1.il : example file in intermediate language
 |   |-- example1.tl : example source file
